@@ -3,8 +3,9 @@
 
 %ul#categories
 	- @categories.each do |cat|
-		%li 
-			%h3
-				= cat["name"]
+		%li
+			%a{:href=>"/category/#{cat['id']}", :class=>'js-category'}
+				%h3
+					= cat["name"]
 			%p
 				= cat["desc"]

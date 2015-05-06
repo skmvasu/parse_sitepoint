@@ -1,9 +1,24 @@
 !!!
 %html
 	%head
-		%title RedisCache
+		%title Build Custom analytics with Parse
 		= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
 		= javascript_include_tag 'application', 'data-turbolinks-track' => true
+		= javascript_include_tag 'vendor/parse', 'data-turbolinks-track' => true
+		= javascript_include_tag 'analytics', 'data-turbolinks-track' => true
 		= csrf_meta_tags
 	%body
 		= yield
+	:javascript
+		CustomAnalytics.init();
+
+		$( '.js-category' ).on('click', function(e){
+		  debugger;
+		  e.preventDefault();
+		  var url = e.currentTarget.href;
+		  Parse.Analytics.track( 'CATEGORY_CLICK', {
+		    'target': 'category',
+		  }).then(function(){
+					window.location.href = url;
+			});
+		});
